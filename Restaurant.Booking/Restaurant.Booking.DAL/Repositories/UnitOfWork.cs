@@ -13,11 +13,13 @@ namespace Restaurant.Booking.DAL.Repositories
         {
             _context = context;            
         }
-        public IRestaurantRepository Restaurants => new RestaurantRepository(_context);
+        public IRestaurantRepository RestaurantRepository => new RestaurantRepository(_context);
 
-        public IPersonRepository Persons => new PersonRepository(_context);
+        public IPersonRepository PersonRepository => new PersonRepository(_context);
 
-        public IOrderRepository Orders => new OrderRepository(_context);
+        public IOrderRepository OrderRepository => new OrderRepository(_context);
+
+        public ITableRepository TableRepository => new TableRepository(_context);
 
         public int Complete()
         {

@@ -2,24 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using Restaurant.Booking.DAL.Interfaces;
+using Restaurant.Booking.DAL.Entities;
 
 namespace Restaurant.Booking.DAL.Repositories
 {
-    public class RestaurantRepository : Repository<Restaurant>, IRestaurantRepository
+    public class RestaurantRepository : Repository<Entities.Restaurant>, IRestaurantRepository
      {
         public RestaurantRepository(ApplicationDbContext context) : base(context)
         {
 
-        }
-
-        public void AddRestaurant(Restaurant restaurant)
-        {
-            Add(restaurant);
-        }
-
-        public void DeleteRestaurant(Restaurant restaurant)
-        {
-            Remove(restaurant);
         }
 
         public IEnumerable<Table> GetFreeTables()
@@ -31,5 +22,7 @@ namespace Restaurant.Booking.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

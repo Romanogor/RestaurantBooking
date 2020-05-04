@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Restaurant.Booking.DAL.Interfaces;
+using Restaurant.Booking.DAL.Entities;
 
 namespace Restaurant.Booking.DAL.Repositories
 {
@@ -11,9 +12,6 @@ namespace Restaurant.Booking.DAL.Repositories
         {
         }
 
-        public void AddPerson(Person person)
-        {
-            Context.Persons.Add(person);
-        }
+      
     }
 }

@@ -7,9 +7,11 @@ namespace Restaurant.Booking.DAL.Repositories
 {
    public interface IUnitOfWork : IDisposable
     {
-        IRestaurantRepository Restaurants { get; }
-        IPersonRepository Persons { get; }
-        IOrderRepository Orders { get; }
+        IRestaurantRepository RestaurantRepository { get; }
+        IPersonRepository PersonRepository { get; }
+        IOrderRepository OrderRepository { get; }
+
+        ITableRepository TableRepository { get; }
 
         int Complete();
     }

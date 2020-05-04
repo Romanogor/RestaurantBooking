@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Restaurant.Booking.DAL.Interfaces;
+using Restaurant.Booking.DAL.Entities;
 
 namespace Restaurant.Booking.DAL.Repositories
 {
@@ -10,11 +11,6 @@ namespace Restaurant.Booking.DAL.Repositories
         public OrderRepository(ApplicationDbContext context) : base(context)
         {
 
-        }
-
-        public void AddOrder(Order order)
-        {
-            Context.Orders.Add(order);
         }
 
         public void ChangeOrderStatus(Order order, OrderStatus orderStatus)

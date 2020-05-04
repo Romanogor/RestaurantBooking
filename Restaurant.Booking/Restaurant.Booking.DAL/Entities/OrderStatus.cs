@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Restaurant.Booking.DAL
+namespace Restaurant.Booking.DAL.Entities
 {
     public class OrderStatus
     {
