@@ -7,8 +7,12 @@ namespace Restaurant.Booking.DAL.Entities
     public class Person
     {
         public int PersonId { get; set; }
+
+        public int RestaurantId { get; set; }
         public Restaurant Restaurant { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace Restaurant.Booking.DAL.Entities
     {
         public int CityId { get; set; }
         public string Name { get; set; }
+
+        public IEnumerable<Restaurant> Restaurants { get; set; }
     }
 }

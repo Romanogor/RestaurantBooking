@@ -8,5 +8,7 @@ namespace Restaurant.Booking.DAL.Entities
     {
         public int OrderStatusId { get; set; }
         public string Status { get; set; }
+
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

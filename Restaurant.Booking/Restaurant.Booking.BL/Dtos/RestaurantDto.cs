@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Restaurant.Booking.DAL.Entities
+namespace Restaurant.Booking.BL.Dtos
 {
-    public class Restaurant
+    public class RestaurantDto
     {
         public int RestaurantId { get; set; }
 
         public int CityId { get; set; }
-        public City City { get; set; }
         public string Address { get; set; }
-
-        public IEnumerable<Table> Tables { get; set; }
     }
 }

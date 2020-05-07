@@ -7,9 +7,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200307131056_AddPersonsTable.cs" />
     <Compile Remove="Migrations\20200307131056_AddPersonsTable.Designer.cs" />
+    <Compile Remove="Migrations\20200507154533_AddForeignKeyInDomain.cs" />
+    <Compile Remove="Migrations\20200507154533_AddForeignKeyInDomain.Designer.cs" />
+    <Compile Remove="Migrations\20200507154832_AddForeignKeyToDomain.cs" />
+    <Compile Remove="Migrations\20200507154832_AddForeignKeyToDomain.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="automapper" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
