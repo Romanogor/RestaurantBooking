@@ -13,9 +13,9 @@ namespace Restaurant.Booking.DAL.Repositories
 
         }
 
-        public void ChangeOrderStatus(Order order, OrderStatus orderStatus)
+        public async void ChangeOrderStatus(Order order, OrderStatus orderStatus)
         {
-            var orderInDb = Get(order.OrderId);
+            var orderInDb = await Get(order.OrderId);
             orderInDb.OrderStatus = orderStatus;            
         }
     }

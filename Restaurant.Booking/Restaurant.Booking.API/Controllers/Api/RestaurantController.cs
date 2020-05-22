@@ -24,14 +24,14 @@ namespace Restaurant.Booking.API.Controllers.Api
             _mapper = mapper;
         }
 
-        public IEnumerable<DAL.Entities.Restaurant> GetRestaurants()
+        public async Task<IEnumerable<DAL.Entities.Restaurant>> GetRestaurants()
         {
-            return _restaurantService.GetRestaurants();
+            return await _restaurantService.GetRestaurants();
         }
 
-        public RestaurantDto GetRestaurant(int id)
+        public async Task<RestaurantDto> GetRestaurant(int id)
         {
-            var restaurant = _restaurantService.GetRestaurant(id);
+            var restaurant = await _restaurantService.GetRestaurant(id);
 
             return _mapper.Map<DAL.Entities.Restaurant, RestaurantDto>(restaurant);
         }

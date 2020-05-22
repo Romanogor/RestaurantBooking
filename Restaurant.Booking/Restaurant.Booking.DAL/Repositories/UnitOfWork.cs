@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Restaurant.Booking.DAL.Repositories
 {
@@ -21,9 +22,9 @@ namespace Restaurant.Booking.DAL.Repositories
 
         public ITableRepository TableRepository => new TableRepository(_context);
 
-        public int Complete()
+        public async Task<int> Complete()
         {
-            return _context.SaveChanges();
+            return await _context.SaveChangesAsync();
         }
 
         public void Dispose()

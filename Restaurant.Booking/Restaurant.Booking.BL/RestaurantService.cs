@@ -3,6 +3,7 @@ using Restaurant.Booking.DAL.Entities;
 using Restaurant.Booking.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Restaurant.Booking.BL
 {
@@ -15,14 +16,14 @@ namespace Restaurant.Booking.BL
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<DAL.Entities.Restaurant> GetRestaurants()
+        public async Task<IEnumerable<DAL.Entities.Restaurant>> GetRestaurants()
         {
-            return _unitOfWork.RestaurantRepository.GetAll();
+            return await _unitOfWork.RestaurantRepository.GetAll();
         }
 
-        public DAL.Entities.Restaurant GetRestaurant(int id)
+        public async Task<DAL.Entities.Restaurant> GetRestaurant(int id)
         {
-            return _unitOfWork.RestaurantRepository.Get(id);
+            return await Task.Run(() =>_unitOfWork.RestaurantRepository.Get(id));
         }
 
         public DAL.Entities.Restaurant AddRestaurant(DAL.Entities.Restaurant restaurant)
@@ -33,24 +34,24 @@ namespace Restaurant.Booking.BL
             return restaurant;
         }
 
-        public void RemoveRestaurant(DAL.Entities.Restaurant restaurant)
+        public async Task RemoveRestaurant(DAL.Entities.Restaurant restaurant)
         {
             _unitOfWork.RestaurantRepository.Remove(restaurant);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
         }
 
-        public Table AddTable(Table table)
+        public async Task<Table> AddTable(Table table)
         {
             _unitOfWork.TableRepository.Add(table);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
 
             return table;
         }
 
-        public void AddTables(List<Table> tables)
+        public async Task AddTables(List<Table> tables)
         {
             _unitOfWork.TableRepository.AddRange(tables);
-            _unitOfWork.Complete();
+            await _unitOfWork.Complete();
         }
     }
 }

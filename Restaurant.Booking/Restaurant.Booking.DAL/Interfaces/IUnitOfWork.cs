@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Restaurant.Booking.DAL.Interfaces;
 
 namespace Restaurant.Booking.DAL.Repositories
@@ -13,6 +14,6 @@ namespace Restaurant.Booking.DAL.Repositories
 
         ITableRepository TableRepository { get; }
 
-        int Complete();
+        Task<int> Complete();
     }
 }

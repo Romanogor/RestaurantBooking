@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Restaurant.Booking.DAL.Repositories
 {
@@ -15,29 +16,29 @@ namespace Restaurant.Booking.DAL.Repositories
         {
             Context = context;
         }
-        public TEntity Get(int id)
+        public async Task<TEntity> Get(int id)
         {
-            return Context.Set<TEntity>().Find(id);
+            return await Task.Run(() => Context.Set<TEntity>().Find(id));
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return Context.Set<TEntity>().ToList();
+            return await Task.Run(() => Context.Set<TEntity>().ToList());
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return Context.Set<TEntity>().Where(predicate);
+            return await Task.Run(() => Context.Set<TEntity>().Where(predicate));
         }
 
-        public void Add(TEntity entity)
+        public async void Add(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
+            await Task.Run(() => Context.Set<TEntity>().Add(entity));
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public async void AddRange(IEnumerable<TEntity> entities)
         {
-            Context.Set<TEntity>().AddRange(entities);
+            await Task.Run(() => Context.Set<TEntity>().AddRange(entities));
         }
 
 
