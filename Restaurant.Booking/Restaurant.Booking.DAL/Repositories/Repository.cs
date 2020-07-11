@@ -1,4 +1,5 @@
-﻿using Restaurant.Booking.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Restaurant.Booking.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +19,27 @@ namespace Restaurant.Booking.DAL.Repositories
         }
         public async Task<TEntity> Get(int id)
         {
-            return await Task.Run(() => Context.Set<TEntity>().Find(id));
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await Task.Run(() => Context.Set<TEntity>().ToList());
+            return await Context.Set<TEntity>().ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.Run(() => Context.Set<TEntity>().Where(predicate));
+            return await Context.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
         public async void Add(TEntity entity)
         {
-            await Task.Run(() => Context.Set<TEntity>().Add(entity));
+            await Context.Set<TEntity>().AddAsync(entity);
         }
 
         public async void AddRange(IEnumerable<TEntity> entities)
         {
-            await Task.Run(() => Context.Set<TEntity>().AddRange(entities));
+            await Context.Set<TEntity>().AddRangeAsync(entities);
         }
 
 
