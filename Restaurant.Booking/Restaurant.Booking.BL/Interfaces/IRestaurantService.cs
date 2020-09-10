@@ -1,4 +1,5 @@
-﻿using Restaurant.Booking.DAL.Entities;
+﻿using Restaurant.Booking.BL.Dtos;
+using Restaurant.Booking.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,13 +9,13 @@ namespace Restaurant.Booking.BL.Interfaces
 {
     public interface IRestaurantService
     {
-        public DAL.Entities.Restaurant AddRestaurant(DAL.Entities.Restaurant restaurant);
+        public RestaurantDto AddRestaurant(RestaurantDto restaurant);
 
-        public Task<IEnumerable<DAL.Entities.Restaurant>> GetRestaurants();
-        public Task<DAL.Entities.Restaurant> GetRestaurant(int id);
-        public Task RemoveRestaurant(DAL.Entities.Restaurant restaurant);
-        public Task<Table> AddTable(Table table);
-        public Task AddTables(List<Table> tables);
+        public Task<IEnumerable<RestaurantDto>> GetRestaurants();
+        public Task<RestaurantDto> GetRestaurant(int id);
+        public Task RemoveRestaurant(RestaurantDto restaurantDto);
+        public Task<TableDto> AddTable(TableDto tableDto);
+        public Task AddTables(List<TableDto> tableDtos);
         
     }
 }

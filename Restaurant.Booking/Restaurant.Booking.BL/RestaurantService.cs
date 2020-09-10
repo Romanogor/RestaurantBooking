@@ -1,4 +1,6 @@
-﻿using Restaurant.Booking.BL.Interfaces;
+﻿using AutoMapper;
+using Restaurant.Booking.BL.Dtos;
+using Restaurant.Booking.BL.Interfaces;
 using Restaurant.Booking.DAL.Entities;
 using Restaurant.Booking.DAL.Repositories;
 using System;
@@ -10,46 +12,71 @@ namespace Restaurant.Booking.BL
     public class RestaurantService : IRestaurantService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public RestaurantService(IUnitOfWork unitOfWork)
+        public RestaurantService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DAL.Entities.Restaurant>> GetRestaurants()
+        public async Task<IEnumerable<RestaurantDto>> GetRestaurants()
         {
-            return await _unitOfWork.RestaurantRepository.GetAll();
+            var restaurants = await _unitOfWork.RestaurantRepository.GetAll();
+            List<RestaurantDto> restaurantDtos = new List<RestaurantDto>();
+            foreach (var restaurant in restaurants)
+            {
+                RestaurantDto restaurantDto = _mapper.Map<RestaurantDto>(restaurant);
+                restaurantDtos.Add(restaurantDto);
+            }
+
+            return restaurantDtos;
         }
 
-        public async Task<DAL.Entities.Restaurant> GetRestaurant(int id)
+        public async Task<RestaurantDto> GetRestaurant(int id)
         {
-            return await Task.Run(() =>_unitOfWork.RestaurantRepository.Get(id));
+            var restaurant = await _unitOfWork.RestaurantRepository.Get(id);
+
+            RestaurantDto restaurantDto = _mapper.Map<RestaurantDto>(restaurant);
+
+            return restaurantDto;
+
         }
 
-        public DAL.Entities.Restaurant AddRestaurant(DAL.Entities.Restaurant restaurant)
+        public RestaurantDto AddRestaurant(RestaurantDto restaurantDto)
         {
+            DAL.Entities.Restaurant restaurant = _mapper.Map<DAL.Entities.Restaurant>(restaurantDto);
             _unitOfWork.RestaurantRepository.Add(restaurant);
             _unitOfWork.Complete();
 
-            return restaurant;
+            return restaurantDto;
         }
 
-        public async Task RemoveRestaurant(DAL.Entities.Restaurant restaurant)
+        public async Task RemoveRestaurant(RestaurantDto restaurantDto)
         {
+            DAL.Entities.Restaurant restaurant = _mapper.Map<DAL.Entities.Restaurant>(restaurantDto);
             _unitOfWork.RestaurantRepository.Remove(restaurant);
             await _unitOfWork.Complete();
         }
 
-        public async Task<Table> AddTable(Table table)
+        public async Task<TableDto> AddTable(TableDto tableDto)
         {
+            Table table = _mapper.Map<Table>(tableDto);
             _unitOfWork.TableRepository.Add(table);
             await _unitOfWork.Complete();
 
-            return table;
+            return tableDto;
         }
 
-        public async Task AddTables(List<Table> tables)
+        public async Task AddTables(List<TableDto> tableDtos)
         {
+            List<Table> tables = new List<Table>();
+            foreach (var tableDto in tableDtos)
+            {
+                Table table = _mapper.Map<Table>(tableDto);
+                tables.Add(table);
+            }
+
             _unitOfWork.TableRepository.AddRange(tables);
             await _unitOfWork.Complete();
         }

@@ -12,6 +12,7 @@ namespace Restaurant.Booking.BL
         public MappingProfile()
         {
             CreateMap<DAL.Entities.Restaurant, RestaurantDto>();
+            CreateMap<RestaurantDto, DAL.Entities.Restaurant>();
         }
     }
 }

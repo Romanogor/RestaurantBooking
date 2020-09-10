@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.Booking.BL.Dtos;
 using Restaurant.Booking.BL.Interfaces;
-using Restaurant.Booking.DAL.Repositories;
-
 namespace Restaurant.Booking.API.Controllers.Api
 {
     [Route("api/[controller]")]
@@ -24,16 +19,14 @@ namespace Restaurant.Booking.API.Controllers.Api
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<DAL.Entities.Restaurant>> GetRestaurants()
+        public async Task<IEnumerable<RestaurantDto>> GetRestaurants()
         {
             return await _restaurantService.GetRestaurants();
         }
 
         public async Task<RestaurantDto> GetRestaurant(int id)
         {
-            var restaurant = await _restaurantService.GetRestaurant(id);
-
-            return _mapper.Map<DAL.Entities.Restaurant, RestaurantDto>(restaurant);
+            return await _restaurantService.GetRestaurant(id);
         }
     }
 }
